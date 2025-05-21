@@ -1,0 +1,31 @@
+<wsdl:definitions targetNamespace="http://ads.sj.ifsc.edu.br/pbe">
+    <wsdl:message name="subtracaoRequest">
+        <wsdl:part name="i1" type="xsd:int"/>
+        <wsdl:part name="i2" type="xsd:int"/>
+    </wsdl:message>
+    <wsdl:message name="somaRequest">
+        <wsdl:part name="i1" type="xsd:int"/>
+        <wsdl:part name="i2" type="xsd:int"/>
+    </wsdl:message>
+    <wsdl:message name="subtracaoResponse">
+        <wsdl:part name="subtracaoReturn" type="xsd:int"/>
+    </wsdl:message>
+    <wsdl:message name="somaResponse">
+        <wsdl:part name="somaReturn" type="xsd:int"/>
+    </wsdl:message>
+    <wsdl:portType name="Calculadora">
+        <wsdl:operation name="soma" parameterOrder="i1 i2">
+            <wsdl:input message="impl:somaRequest" name="somaRequest"/>
+            <wsdl:output message="impl:somaResponse" name="somaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="subtracao" parameterOrder="i1 i2">
+            <wsdl:input message="impl:subtracaoRequest" name="subtracaoRequest"/>
+            <wsdl:output message="impl:subtracaoResponse" name="subtracaoResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:service name="CalculadoraService">
+        <wsdl:port binding="impl:CalculadoraSoapBinding" name="Calculadora">
+            <wsdlsoap:address location="http://localhost:8080/ws/calc"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
